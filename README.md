@@ -34,3 +34,27 @@ This technique embraces Test-Driven Development (TDD) and is perfect when you ha
 - Each "Pong" can also be followed by refactoring the code together, before you move on to the next failing test. This way you follow the "Red - Green - Refactor" approach: Write a failing test (red), make it pass with the minimum necessary means (green), and then refactor.
 
 
+
+## Transformation Priority Premise
+
+1. ### ({} → nil) no code at all → code that employs nil
+2. ### (nil → constant)
+3. ### (constant → constant+) a simple constant to a more complex constant
+4. ### (constant → scalar) replacing a constant with a variable or an argument
+5. ### (statement → statements) adding more unconditional statements.
+6. ### (unconditional → if) splitting the execution path
+7. ### (scalar → array)
+8. ### (array → container)
+9. ### (statement → tail-recursion)
+10. ###  (if → while)
+11. ### (statement → non-tail-recursion)
+12. ### (expression → function) replacing an expression with a function or algorithm
+13. ### (variable → assignment) replacing the value of a variable.
+14. ### (case) adding a case (or else) to an existing switch or if
+
+
+[5, 2, 6, 8, 1, 9]
+
+[ 2  3  4  16  18 24  27]
+            
+
