@@ -1,7 +1,7 @@
 # Project2-Find-a-Pair
 Find a pair for a given sum in an array
 
-Given an unsorted integer array, find a pair with the given sum in it.
+Given an unsorted array of integers, find a pair with the sum equal to the given target.
 
 For example,
 
