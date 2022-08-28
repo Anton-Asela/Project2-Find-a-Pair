@@ -1,10 +1,12 @@
 package main.java;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.Timer;
 import java.util.random.RandomGenerator;
 import java.util.stream.Collectors;
 
@@ -16,7 +18,7 @@ class FindPairTest {
 
     @BeforeEach
     void init() {
-        pair = new FindPair();
+        pair = new FindPair().useAlgo(FindPair.Algo.BRUTE);
     }
 
     private void testFindPair_noSolution(int target, int... values) {
@@ -24,6 +26,12 @@ class FindPairTest {
         assertNotNull(ret);
         assertInstanceOf(Set.class,ret);
         assertTrue(ret.isEmpty());
+    }
+
+
+    private void testFindPair(FindPair.Algo algo, int target, int... input) {
+        pair.useAlgo(algo);
+        testFindPair(target,input);
     }
 
     private void testFindPair(int target, int... input) {
@@ -76,11 +84,22 @@ class FindPairTest {
 
     @Test
     void check_performance() {
-        int[] input = RandomGenerator.getDefault().ints(1, 20000)
-                .limit(1000000).toArray();
-        input[input.length - 1] = 100_000_000;
-        input[input.length - 2] = 100_000_001;
-        testFindPair(200_000_001, input);
+        StopWatch stopWatch = new StopWatch();
+
+        for(FindPair.Algo algo: FindPair.Algo.values()) {
+            System.out.printf("%n %15s : ", algo);
+            for (int size = 10; size < 10_000_000; size *= 10) {
+                int[] input = RandomGenerator.getDefault().ints(1, 20000)
+                        .limit(size).toArray();
+                input[input.length - 1] = 100_000_000;
+                input[input.length - 2] = 100_000_001;
+                stopWatch.reset();
+                stopWatch.start();
+                testFindPair(algo, 200_000_001, input);
+                stopWatch.stop();
+                System.out.printf("(%10s,%10s) ", size, stopWatch.getTime());
+            }
+        }
     }
 
 }

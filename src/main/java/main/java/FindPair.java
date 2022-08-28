@@ -4,12 +4,31 @@ import java.util.*;
 
 public class FindPair {
 
-    public Set<Integer> findPair(int[] values, int target) {
-    //    return hashMapSolution(values, target);
-        return twoPointerSolution(values, target);
+    public enum Algo { BRUTE,TWO_POINTER,HASH_SET}
+
+    private Algo useAlgo = Algo.HASH_SET;
+
+    public FindPair useAlgo(Algo algo) {
+        this.useAlgo = algo;
+        return this;
     }
 
-    private Set<Integer> hashMapSolution(int[] values, int target) {
+    public Set<Integer> findPair(int[] values, int target) {
+        switch (useAlgo) {
+            case BRUTE -> {
+                return bruteForceSolution(values, target);
+            }
+            case TWO_POINTER -> {
+                return twoPointerSolution(values, target);
+            }
+            case HASH_SET -> {
+                return hashSetSolution(values, target);
+            }
+            default -> throw new IllegalStateException("No Algo Defined.");
+        }
+    }
+
+    private Set<Integer> hashSetSolution(int[] values, int target) {
         Set<Integer> ret = new HashSet<>();
 
         if (!Objects.nonNull(values) || values.length <= 0) {
