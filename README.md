@@ -53,8 +53,14 @@ This technique embraces Test-Driven Development (TDD) and is perfect when you ha
 14. ### (case) adding a case (or else) to an existing switch or if
 
 
-[5, 2, 6, 8, 1, 9]
+## Performance Test Results for Three Algorithms 
 
-[ 2  3  4  16  18 24  27]
+```text
+
+           BRUTE : (        10,         2) (       100,         0) (      1000,         2) (     10000,        13) (    100000,      1258) (   1000000,    107943) 
+     TWO_POINTER : (        10,         0) (       100,         0) (      1000,         0) (     10000,         3) (    100000,        11) (   1000000,        74) 
+        HASH_SET : (        10,         0) (       100,         0) (      1000,         0) (     10000,         2) (    100000,        12) (   1000000,        35) 
+
+```
             
 
